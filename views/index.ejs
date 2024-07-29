@@ -34,6 +34,8 @@
       <button type="submit" class="form-submit">Go</button>
     </form>
     <section id="cards" class="cards">
+
+      <%if(locals.data) {%>
       <article class="card-item">
         <h2 class="card-activity">
           <%=locals.data.activity%>
@@ -48,12 +50,12 @@
           </span>
         </div>
       </article>
-
+    <% } else { %>
 
       <div id="tag-error" class="tag-error">
         <h3><%=locals.error%></h3>
       </div>
-
+    <% } %>
     </section>
   </div>
 

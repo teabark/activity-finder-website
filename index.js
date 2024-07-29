@@ -30,16 +30,15 @@ app.post("/", async (req, res) => {
   var participants = req.body["participants"];
 
   try {
-    const response = await axios.get(`https://bored-api.appbrewery.com/filter?type=${type}`);
+    const response = await axios.get(`https://bored-api.appbrewery.com/filter?type=${type}&participants=${participants}`);
     const result = response.data;
-    var arrayLength = result.length;
-    var random = Math.floor(Math.random());
     console.log(result);
-    res.render("index.ejs", { data: result });
+    var random = Math.floor(Math.random() * result.length);
+    res.render("index.ejs", { data: result[random] });
   } catch (error) {
     console.error("Failed to make request:", error.message);
     res.render("index.ejs", {
-      error: error.message,
+      error: "No activities that match your criteria",
     });
   }
 
